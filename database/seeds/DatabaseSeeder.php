@@ -16,9 +16,16 @@
 			factory(User::class)->create([
 				'email' => 'admin@koloxo.test'
 			]);
-			for ($i = 1; $i < 10; $i++)
+			
+			$this->call([
+				CountrySeeder::class,
+				OfficeSeeder::class
+			]);
+			
+			for ($i = 1; $i < 10; $i++){
 				factory(User::class)->create([
 					'email' => "user$i@koloxo.test"
 				]);
+			}
 		}
 	}

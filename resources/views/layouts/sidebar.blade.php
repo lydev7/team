@@ -26,6 +26,12 @@
                         <p>Positions</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('office.index') }}" class="nav-link">
+                        <i class="fas fa-building"></i>
+                        <p>Offices</p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

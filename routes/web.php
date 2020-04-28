@@ -18,14 +18,11 @@
 	
 	Route::get('/', 'HomeController@index')->name('home');
 	
-	// TODO:: views
+	// TODO:: views && authorize && middleware auth.
 	Route::resource('position','PositionController')->except(['destroy']);
 	
-	/*
-	 * offices : list create show update export.
-	 * data : name address country  phone logo creator.
-	 */
-	//Route::resource('office','OfficeController')->except(['destroy']);
+	//TODO:: data views && authorize && middleware auth.
+	Route::resource('office','OfficeController')->except(['destroy']);
 	/*
 	 * Members : list create show update delete restore params psw.
 	 * data : last first gender birth avatar psw email Post phone office creator
