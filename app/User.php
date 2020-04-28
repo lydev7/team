@@ -36,4 +36,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+	
+	public function getFullNameAttribute()
+	{
+		return 'full_name';
+    }
+	
+	public function positions()
+	{
+		return $this->hasMany(Position::class);
+    }
 }
