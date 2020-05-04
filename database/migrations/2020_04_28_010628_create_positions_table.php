@@ -17,10 +17,14 @@ class CreatePositionsTable extends Migration
             $table->id();
             $table->string('name',45)->unique();
             $table->unsignedBigInteger('creator_id')->index();
-            $table->foreign('creator_id')
-	            ->references('id')
-	            ->on('users');
             $table->timestamps();
+        });
+        
+        Schema::table('users', function (Blueprint $table){
+	        $table->unsignedBigInteger('position_id')->index();
+	        $table->foreign('position_id')
+		        ->references('id')
+		        ->on('positions');
         });
     }
 

@@ -12,7 +12,7 @@
 		 */
 		public function run()
 		{
-			$positions = ['CEO', 'Manager'];
+			$positions = ['CEO', 'Manager', 'IT', 'Moderator', 'RH'];
 			
 			foreach ($positions as $position) {
 				Position::create([

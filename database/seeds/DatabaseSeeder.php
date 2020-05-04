@@ -12,19 +12,23 @@
 		 */
 		public function run()
 		{
-			// $this->call(UserSeeder::class);
-			factory(User::class)->create([
-				'email' => 'admin@koloxo.test'
-			]);
 			
 			$this->call([
+				rolesSeeder::class,
 				CountrySeeder::class,
-				OfficeSeeder::class
+				OfficeSeeder::class,
+				PositionSeeder::class
 			]);
 			
-			for ($i = 1; $i < 10; $i++){
+			factory(User::class)->create([
+				'email'       => 'admin@koloxo.test',
+				'position_id' => 3
+			])->roles()->attach(1);
+			
+			for ($i = 1; $i < 6; $i++) {
 				factory(User::class)->create([
-					'email' => "user$i@koloxo.test"
+					'email'       => "user$i@koloxo.test",
+					'position_id' => $i
 				]);
 			}
 		}

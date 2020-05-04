@@ -26,11 +26,11 @@ class CreateOfficesTable extends Migration
 	            ->references('id')
 	            ->on('countries');
             $table->unsignedBigInteger('creator_id')->index();
-            $table->foreign('creator_id')
-	            ->references('id')
-	            ->on('users');
             $table->timestamps();
         });
+	    Schema::table('users', function (Blueprint $table){
+		    $table->unsignedBigInteger('office_id');
+	    });
     }
 
     /**

@@ -5,49 +5,73 @@
 	use Illuminate\Foundation\Auth\User as Authenticatable;
 	use Illuminate\Notifications\Notifiable;
 	
+	/**
+	 * @method static create(array $all)
+	 */
 	class User extends Authenticatable
 	{
 		use Notifiable;
 		
-		/**
-		 * The attributes that are mass assignable.
-		 *
-		 * @var array
-		 */
 		protected $fillable = [
-			'name', 'email', 'password',
+			'last_name', 'first_name',
+			'gender', 'birth',
+			'avatar', 'phone',
+			'email', 'password',
+			'position_id', 'office_id', 'creator_id'
 		];
 		
-		/**
-		 * The attributes that should be hidden for arrays.
-		 *
-		 * @var array
-		 */
 		protected $hidden = [
 			'password', 'remember_token',
 		];
 		
-		/**
-		 * The attributes that should be cast to native types.
-		 *
-		 * @var array
-		 */
 		protected $casts = [
 			'email_verified_at' => 'datetime',
+			'birth'             => 'date'
 		];
 		
-		public function getFullNameAttribute()
+		public function getFullNameAttribute(): string
 		{
-			return 'full_name';
+			return ucfirst($this->first_name) . ' ' . strtoupper($this->last_name);
 		}
 		
-		public function positions()
+		public function createdPositions()
 		{
 			return $this->hasMany(Position::class);
 		}
 		
-		public function offices()
+		public function createdOffices()
 		{
 			return $this->hasMany(Office::class);
 		}
+		
+		public function office()
+		{
+			return $this->belongsTo(Office::class);
+		}
+		
+		public function position()
+		{
+			return $this->belongsTo(Position::class);
+		}
+		
+		public function creator()
+		{
+			return $this->belongsTo(User::class);
+		}
+		
+		public function createdUsers()
+		{
+			return $this->hasMany(User::class, 'creator_id');
+		}
+		
+		public function activities()
+		{
+			return $this->hasMany(Activity::class);
+		}
+		
+		public function roles()
+		{
+			return $this->belongsToMany(Role::class);
+		}
+		
 	}

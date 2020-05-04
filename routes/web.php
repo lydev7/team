@@ -13,21 +13,27 @@
 	| contains the "web" middleware group. Now create something great!
 	|
 	*/
-	
-	Auth::routes();
-	
+	// TODO:: report from activity < daily - weekly - monthly - yearly >
+	// Home:: only auth user
 	Route::get('/', 'HomeController@index')->name('home');
 	
-	// TODO:: views && authorize && middleware auth.
+	// auth :: login - reset psw.
+	Auth::routes(['register' => FALSE]);
+	
+	// Position
+	// TODO:: Documentation and Explications
 	Route::resource('position','PositionController')->except(['destroy']);
 	
-	//TODO:: data views && authorize && middleware auth.
-	Route::resource('office','OfficeController')->except(['destroy']);
-	/*
-	 * Members : list create show update delete restore params psw.
-	 * data : last first gender birth avatar psw email Post phone office creator
-	 */
+	//TODO:: countries && event(Activity - Report)
 	
+	//TODO:: data Profile && views && authorize && event(activity - Report).
+	Route::resource('office','OfficeController')->except(['destroy']);
+	
+	/*
+	 * data : last first gender birth avatar phone psw email  Post office creator.
+	 * Members : list create show update delete restore params psw.
+	 */
+	Route::resource('user','UserController');
 	/*
 	 * suppliers : list create update delete restore confirmation storage show export import.
 	 * data : name address country phone speaker office creator storage %
